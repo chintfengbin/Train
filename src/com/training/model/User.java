@@ -17,6 +17,15 @@ public class User {
 
     private String phone;
 
+    private long dep_id;
+
+    public long getDep_id() {
+        return dep_id;
+    }
+
+    public void setDep_id(long dep_id) {
+        this.dep_id = dep_id;
+    }
 
     public Integer getId() {
         return id;
