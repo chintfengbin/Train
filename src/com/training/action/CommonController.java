@@ -1,7 +1,11 @@
 package com.training.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.training.common.config.Global;
+import com.training.common.config.ServerConfig;
+import com.training.common.core.domain.AjaxResult;
+import com.training.common.utils.StringUtils;
+import com.training.common.utils.file.FileUploadUtils;
+import com.training.common.utils.file.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.training.common.core.domain.AjaxResult;
-import com.training.common.utils.StringUtils;
-import com.training.common.utils.file.FileUploadUtils;
-import com.training.common.utils.file.FileUtils;
-import com.training.common.config.Global;
-import com.training.common.config.ServerConfig;
-import com.training.common.constant.Constants;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
