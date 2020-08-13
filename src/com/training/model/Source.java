@@ -1,5 +1,7 @@
 package com.training.model;
 
+import java.io.File;
+
 public class Source {
     private Integer id;
 
@@ -19,6 +21,7 @@ public class Source {
     private String bgpath;
     private long userclick;
 
+
     public long getUserclick() {
         return userclick;
     }
@@ -26,6 +29,7 @@ public class Source {
     public void setUserclick(long userclick) {
         this.userclick = userclick;
     }
+
 
     public String getBgimage() {
         return bgpath;
