@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -89,13 +87,16 @@ public class SourceController {
     }
 
     @RequestMapping("/list")
-    public void list(){
+    public ModelAndView list(){
         List<Source> sources=sourceService.list();
         for (Source s:sources){
             System.out.println(s);
         }
-       List<String> filename= find(new File("E:\\project\\Train\\Train\\WebContent\\upload"));
-
+//       List<String> filename= find(new File("E:\\project\\Train\\Train\\WebContent\\upload"));
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("file/sourcelist");
+        modelAndView.addObject("sources",sourceService.list());
+        return modelAndView;
     }
 
 

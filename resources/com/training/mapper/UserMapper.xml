@@ -20,9 +20,9 @@
   <insert id="add" parameterType="com.training.model.User">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
+<!--      <if test="id != null">-->
+<!--        id,-->
+<!--      </if>-->
       <if test="username != null">
         username,
       </if>
@@ -49,9 +49,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
+<!--      <if test="id != null">-->
+<!--        #{id,jdbcType=INTEGER},-->
+<!--      </if>-->
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>

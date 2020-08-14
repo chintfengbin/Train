@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.RoleMapper">
+
+    <select id="select" resultType="com.training.model.Role" parameterType="com.training.model.Role">
+        select id,rolename,remark from role
+        <where>
+<!--            <if test="id != null and id!='' ">and id = #{id} </if>-->
+            <if test="rolename !=null and rolename !='' ">and rolename = #{rolename}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="com.training.model.Role">
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+<!--            <if test="id != null">-->
+<!--                id,-->
+<!--            </if>-->
+            <if test="rolename != null">
+                rolename,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+<!--            <if test="id != null">-->
+<!--                #{id,jdbcType=INTEGER},-->
+<!--            </if>-->
+            <if test="rolename != null">
+                #{rolename,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from department where id= #{id};
+    </delete>
+
+    <update id="update" parameterType="com.training.model.Role">
+        update role
+        <set>
+            <if test="rolename != null">
+                rolename = #{rolename},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+</mapper>
