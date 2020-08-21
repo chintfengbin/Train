@@ -14,4 +14,6 @@ public interface UserService {
     void deleteById(long id);
 
     void update(User user);
+
+    User userinf(long id);
 }

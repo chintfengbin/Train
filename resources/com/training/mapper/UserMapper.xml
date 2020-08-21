@@ -14,7 +14,10 @@
   </resultMap>
 
   <select id="selectByName" resultType="com.training.model.User" parameterType="String">
-    select from sys_user where username=#{name};
+    select * from sys_user where username=#{name};
+  </select>
+    <select id="userInf" resultType="com.training.model.User" parameterType="long">
+    select * from sys_user where id=#{id};
   </select>
 
   <insert id="add" parameterType="com.training.model.User">

@@ -1,17 +1,17 @@
 package com.training.action;
 
+import com.training.model.PageInfo;
 import com.training.model.Source;
 import com.training.service.SourceService;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -35,7 +35,7 @@ public class SourceController {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
     public String upload(@RequestParam(value = "file",required = false) CommonsMultipartFile file, @RequestParam(value = "bgpath",required = false) CommonsMultipartFile bgpath,HttpServletRequest request) throws IOException {
-        System.out.println("666");
+        System.out.println("文件上传成功！");
         Source source=new Source();
         ModelAndView modelAndView=new ModelAndView();
         source.setTitle(request.getParameter("title"));
@@ -83,10 +83,10 @@ public class SourceController {
         source.setBgimage(newImage.toString());
         sourceService.add(source);
         System.out.println("上传文件成功！");
-        return "success";
+        return "success！";
     }
 
-    @RequestMapping("/list")
+/*    @RequestMapping("/list")
     public ModelAndView list(){
         List<Source> sources=sourceService.list();
         for (Source s:sources){
@@ -97,9 +97,43 @@ public class SourceController {
         modelAndView.setViewName("file/sourcelist");
         modelAndView.addObject("sources",sourceService.list());
         return modelAndView;
+    }*/
+
+    @RequestMapping("/listjson")
+    @ResponseBody
+    public List<Source> listjson(HttpServletResponse response){
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        List<Source> sources=sourceService.list();
+       // JSONArray jsonArray2 = JSONArray.fromObject( sources );
+       // System.out.println(jsonArray2);
+       // return jsonArray2;
+        return sources;
+    }
+
+    @RequestMapping("/listSourceByPage")
+    @ResponseBody
+    public PageInfo<Source> listByPage(Integer currentPage,Integer pageSize){
+        return sourceService.listSourceByPage(currentPage,pageSize);
     }
 
 
+    /*
+    * 根据部门查询资源列表
+    *
+    * */
+    @RequestMapping
+    @ResponseBody
+    public List<Source> listSourceByDept(String deptname){
+        List<Source> sources =sourceService.listSourceByDept(deptname);
+        if (sources==null){
+            return null;
+        }else {
+            return sources;
+        }
+    }
     public List<String> find(File file) {
         File[] file1 = file.listFiles();
         List<String> filename=new ArrayList<>();
@@ -115,4 +149,6 @@ public class SourceController {
         }
         return filename;
     }
+
+
 }

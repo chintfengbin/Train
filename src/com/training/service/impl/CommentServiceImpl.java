@@ -6,6 +6,8 @@ import com.training.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -23,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment getCommentBySource(long source_id) {
+    public List<Comment> getCommentBySource(long source_id) {
         return commentMapper.getCommentBySource(source_id);
     }
 }

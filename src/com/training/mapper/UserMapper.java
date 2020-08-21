@@ -33,4 +33,6 @@ public interface UserMapper {
     void deleteById(long id);
 
     void update(User user);
+
+    User userInf(long id);
 }

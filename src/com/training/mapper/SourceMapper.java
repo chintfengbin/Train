@@ -25,5 +25,7 @@ public interface SourceMapper {
 
     void add(Source source);
 
-    List<Source> list();
+    public List<Source> list();
+
+    List<Source> listSourceByDept(String deptname);
 }

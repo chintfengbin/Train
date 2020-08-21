@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User userinf(long id) {
+        return userMapper.userInf(id);
+    }
+
+    @Override
     public List<User> list() {
         return userMapper.list();
     }

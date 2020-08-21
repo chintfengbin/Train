@@ -19,6 +19,6 @@
     </delete>
 
     <select id="getCommentBySource" parameterType="long" resultType="com.training.model.Comment">
-        select from comment where source_id=#{source_id};
+        select * from comment where source_id=#{source_id} order by cmtime DESC ;
     </select>
 </mapper>

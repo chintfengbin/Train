@@ -12,8 +12,14 @@
     <result column="filesize" jdbcType="VARCHAR" property="filesize" />
     <result column="bgpath" jdbcType="VARCHAR" property="bgpath" />
     <result column="userclick" jdbcType="BIGINT" property="userclick"/>
+    <result column="show" jdbcType="BIGINT" property="show"/><!--可见-->
+    <result column="deptname" jdbcType="VARCHAR" property="deptname"/>
+
   </resultMap>
 
+    <select id="listSourceByDept" resultType="com.training.model.Source" parameterType="String">
+        select * from source where deptname = #{deptname}
+    </select>
 
   <insert id="add" parameterType="com.training.model.Source">
     insert into source
@@ -45,6 +51,12 @@
       <if test="bgpath != null">
         bgpath,
       </if>
+        <if test="show != null">
+            show,
+        </if>
+        <if test="deptname != null">
+            deptname,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 <!--      <if test="id != null">-->
@@ -74,11 +86,18 @@
       <if test="bgpath != null">
         #{bgpath},
       </if>
+        <if test="show != null">
+            #{show},
+        </if>
+        <if test="deptname != null">
+            #{deptname},
+        </if>
     </trim>
   </insert>
 
   <select id="list" resultType="com.training.model.Source">
-    select title,filetype,location,uploadtime,bgpath from source;
+--     select id,title,filetype,location,uploadtime,bgpath,deptname from source;
+        select * from source
   </select>
 
 
