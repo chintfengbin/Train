@@ -5,6 +5,7 @@ import com.training.model.UserSource;
 import com.training.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -57,7 +58,7 @@ public class UserController {
 
     @RequestMapping("/userInf")
     @ResponseBody
-    public User userInf(long id){
+    public User userInf( long id){
         return userService.userinf(id);
     }
 

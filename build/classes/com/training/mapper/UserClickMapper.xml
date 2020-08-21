@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.UserClickMapper">
+    <resultMap id="BaseResultMap" type="com.training.model.UserClick">
+        <result column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="source_id" property="source_id"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.training.model.UserClick">
+        insert into user_click
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">user_id,</if>
+            <if test="source_id != null">source_id,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">#{user_id},</if>
+            <if test="source_id != null">#{source_id},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <select id="vdclicknumb" parameterType="long" resultType="long">
+        select sum (clicknumber) from user_click where source_id= #{source_id};
+    </select>
+
+
+</mapper>

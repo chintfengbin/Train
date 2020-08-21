@@ -1,0 +1,72 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.DepartmentMapper">
+
+    <select id="select" resultType="com.training.model.Department" parameterType="com.training.model.Department">
+        select id,deptname,remark,deptid from department
+        <where>
+<!--            <if test="id != null and id!='' ">and id = #{id} </if>-->
+            <if test="deptname !=null and deptname !='' ">and deptname = #{deptname}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="deptid != null and deptid != ''"> and deptid = #{deptid}</if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="com.training.model.Department">
+        insert into department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+<!--            <if test="id != null">-->
+<!--                id,-->
+<!--            </if>-->
+            <if test="deptname != null">
+                deptname,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="deptid != null">
+                deptid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+<!--            <if test="id != null">-->
+<!--                #{id,jdbcType=INTEGER},-->
+<!--            </if>-->
+            <if test="deptname != null">
+                #{deptname,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                #{deptid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from department where deptid= #{deptid};
+    </delete>
+
+    <update id="update" parameterType="com.training.model.Department">
+        update department
+        <set>
+            <if test="deptname != null">
+                deptname = #{deptname},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="deptid != null">
+                deptid = #{remark},
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <select id="list" resultType="com.training.model.Department">
+        select * from department;
+    </select>
+
+</mapper>
