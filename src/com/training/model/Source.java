@@ -20,7 +20,24 @@ public class Source {
     private String filesize;
     private String bgpath;
     private long userclick;
+    private long show;
+    private String deptname;
 
+    public String getDeptname() {
+        return deptname;
+    }
+
+    public void setDeptname(String deptname) {
+        this.deptname = deptname;
+    }
+
+    public long getShow() {
+        return show;
+    }
+
+    public void setShow(long show) {
+        this.show = show;
+    }
 
     public long getUserclick() {
         return userclick;
