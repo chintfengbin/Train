@@ -35,10 +35,10 @@ public class CommentController {
         return commentService.getCommentBySource(source_id);
     }
 
-    @RequestMapping("/listjson")
+    @RequestMapping("/listCommentByPage")
     @ResponseBody
-    public List<Comment> list(long source_id){
-        List<Comment> comments= commentService.getCommentBySource(source_id);
+    public List<Comment> list(Integer currentPage, Integer pageSize,long source_id){
+        List<Comment> comments= commentService.listCommentByPage(currentPage,pageSize,source_id);
         return comments;
     }
 }

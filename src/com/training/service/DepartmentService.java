@@ -13,4 +13,5 @@ public interface DepartmentService {
     void update(Department department);
 
     List<Department> list();
+    List<Department> listDeptByPage(Integer currentPage,Integer pageSize);
 }

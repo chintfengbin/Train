@@ -1,6 +1,8 @@
 package com.training.service.impl;
 
+import com.training.common.utils.SpratePage;
 import com.training.mapper.UserMapper;
+import com.training.model.PageInfo;
 import com.training.model.User;
 import com.training.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    SpratePage<User> spratePage;
 
     @Override
     public void add(User user) {
@@ -36,6 +40,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User userinf(long id) {
         return userMapper.userInf(id);
+    }
+
+    @Override
+    public List<User> listUserByPage(Integer currentPage, Integer pageSize) {
+        List<User> users=userMapper.list();
+        return spratePage.sparate(currentPage,pageSize,users);
     }
 
     @Override

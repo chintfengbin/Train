@@ -11,4 +11,6 @@ public interface CommentService {
     void deleteComment(long id);
 
     List<Comment> getCommentBySource(long source_id);
+
+    List<Comment> listCommentByPage(Integer currentPage,Integer pageSize,long source_id);
 }

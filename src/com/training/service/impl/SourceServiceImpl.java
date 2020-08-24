@@ -1,6 +1,7 @@
 package com.training.service.impl;
 
 import com.github.pagehelper.Page;
+import com.training.common.utils.SpratePage;
 import com.training.mapper.SourceMapper;
 import com.training.model.PageInfo;
 import com.training.model.Source;
@@ -15,6 +16,14 @@ public class SourceServiceImpl implements SourceService {
 
     @Autowired
     SourceMapper sourceMapper;
+
+    /*
+    * 分页工具类
+    * */
+    @Autowired
+    SpratePage<Source> spratePage;
+
+
     @Override
     public void add(Source source) {
         sourceMapper.add(source);
@@ -31,9 +40,10 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public PageInfo<Source> listSourceByPage(Integer currentPage,Integer pageSize){
+    public List<Source> listSourceByPage(Integer currentPage,Integer pageSize){
         List<Source> sources = sourceMapper.list();
-
+        return  spratePage.sparate(currentPage,pageSize,sources);
+/*
         PageInfo<Source> pageInfo = new PageInfo<>(sources.size(), currentPage, pageSize, 5);
 
         //判断是否是最后一页,如果最后一页就显示最后一页的几条，不是最后一页就显示pageSize条
@@ -41,6 +51,6 @@ public class SourceServiceImpl implements SourceService {
             pageInfo.setList(sources.subList((currentPage-1)*pageSize, sources.size()));
         else
             pageInfo.setList(sources.subList((currentPage-1)*pageSize, (currentPage-1)*pageSize+pageSize));
-        return pageInfo;
+        return pageInfo;*/
     }
 }

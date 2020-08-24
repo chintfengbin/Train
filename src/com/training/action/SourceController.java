@@ -115,7 +115,7 @@ public class SourceController {
 
     @RequestMapping("/listSourceByPage")
     @ResponseBody
-    public PageInfo<Source> listByPage(Integer currentPage,Integer pageSize){
+    public List<Source> listByPage(Integer currentPage,Integer pageSize){
         return sourceService.listSourceByPage(currentPage,pageSize);
     }
 

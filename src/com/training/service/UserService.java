@@ -1,5 +1,6 @@
 package com.training.service;
 
+import com.training.model.PageInfo;
 import com.training.model.User;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface UserService {
     void update(User user);
 
     User userinf(long id);
+
+    List<User> listUserByPage(Integer currentPage,Integer pageSize);
 }

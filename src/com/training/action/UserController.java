@@ -1,5 +1,6 @@
 package com.training.action;
 
+import com.training.model.PageInfo;
 import com.training.model.User;
 import com.training.model.UserSource;
 import com.training.service.UserService;
@@ -62,4 +63,9 @@ public class UserController {
         return userService.userinf(id);
     }
 
+    @RequestMapping("/listUserByPage")
+    @ResponseBody
+    public List<User> listByPage(Integer currentPage,Integer pageSize){
+        return userService.listUserByPage(currentPage,pageSize);
+    }
 }

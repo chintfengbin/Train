@@ -49,7 +49,7 @@ public class DepartmentController {
     /*
     * 查询部门列表
     * */
-    @RequestMapping("/list")
+    @RequestMapping("/listDeptByPage")
     @ResponseBody
     public List<Department> list(){
         return departmentService.list();

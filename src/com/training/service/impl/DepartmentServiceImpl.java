@@ -1,5 +1,6 @@
 package com.training.service.impl;
 
+import com.training.common.utils.SpratePage;
 import com.training.mapper.DepartmentMapper;
 import com.training.model.Department;
 import com.training.service.DepartmentService;
@@ -14,6 +15,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     DepartmentMapper departmentMapper;
+    @Autowired
+    SpratePage<Department> spratePage;
 
     @Override
     public Department select(Department department) {
@@ -38,5 +41,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> list() {
         return departmentMapper.list();
+    }
+
+    @Override
+    public List<Department> listDeptByPage(Integer currentPage, Integer pageSize) {
+        List<Department> departments=departmentMapper.list();
+        return spratePage.sparate(currentPage,pageSize,departments);
     }
 }

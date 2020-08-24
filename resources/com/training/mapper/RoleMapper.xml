@@ -55,5 +55,8 @@
         where id=#{id};
     </update>
 
+    <select id="list" resultType="com.training.model.Role">
+        select  * from role;
+    </select>
 
 </mapper>

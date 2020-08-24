@@ -8,7 +8,7 @@ import java.util.List;
 public interface SourceService {
      List<Source> list();
 
-     PageInfo<Source> listSourceByPage(Integer currentPage,Integer pageSize);
+     List<Source> listSourceByPage(Integer currentPage,Integer pageSize);
 
      void add(Source source);
 

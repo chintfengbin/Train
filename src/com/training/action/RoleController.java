@@ -34,6 +34,7 @@ public class RoleController {
         return role1;
     }
 
+
     @RequestMapping("/update")
     public String update(Role role){
         roleService.update(role);
