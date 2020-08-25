@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/userrole")
 public class UserRoleController {
@@ -23,4 +25,23 @@ public class UserRoleController {
         return "success!";
     }
 
+    @RequestMapping("/update")
+    @ResponseBody
+    public String update(UserRole userRole){
+        userRoleService.update(userRole);
+        return "success!";
+    }
+
+    @RequestMapping("/listUserRoleByPage")
+    @ResponseBody
+    public List<UserRole> list(Integer currentPage,Integer pageSize){
+        return userRoleService.listUserRoleByPage(currentPage,pageSize);
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(long id){
+        userRoleService.delete(id);
+        return "success!";
+    }
 }
