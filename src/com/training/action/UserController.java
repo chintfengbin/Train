@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -18,13 +19,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/addpage")
-    public String addpage(){
-        return "user/add";
-    }
+
     @RequestMapping("/add")
     @ResponseBody
-    public String add(User user){
+    public String add(User user,HttpServletResponse response){
+        cross(response);
         String name=user.getUsername();
         User user1=userService.selectByName(name);
         if (user1==null){
@@ -39,33 +38,43 @@ public class UserController {
     }
 
     @RequestMapping("/delete")
-    public String delete(long id){
+    public String delete(long id,HttpServletResponse response){
+        cross(response);
         userService.deleteById(id);
         return "删除成功";
     }
 
     @RequestMapping("/update")
-    public String upadte(User user){
+    public String upadte(User user,HttpServletResponse response){
+        cross(response);
         userService.update(user);
         return "修改成功";
     }
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<User> list(){
+    public List<User> list(HttpServletResponse response){
+        cross(response);
         List<User> users=userService.list();
         return users;
     }
 
     @RequestMapping("/userInf")
     @ResponseBody
-    public User userInf( long id){
+    public User userInf( long id,HttpServletResponse response){
+        cross(response);
         return userService.userinf(id);
     }
 
     @RequestMapping("/listUserByPage")
     @ResponseBody
-    public List<User> listByPage(Integer currentPage,Integer pageSize){
+    public List<User> listByPage(Integer currentPage,Integer pageSize,HttpServletResponse response){
+        cross(response);
         return userService.listUserByPage(currentPage,pageSize);
+    }
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 }

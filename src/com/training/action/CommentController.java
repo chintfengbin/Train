@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -19,26 +20,35 @@ public class CommentController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(Comment comment){
+    public String add(Comment comment,HttpServletResponse response){
+        cross(response);
         commentService.addComment(comment);
         return "success!";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(long id){
+    public String delete(long id,HttpServletResponse response){
+        cross(response);
         commentService.deleteComment(id);
         return "success!";
     }
     @RequestMapping("/select")
-    public List<Comment> select(long source_id){
+    public List<Comment> select(long source_id,HttpServletResponse response){
+        cross(response);
         return commentService.getCommentBySource(source_id);
     }
 
     @RequestMapping("/listCommentByPage")
     @ResponseBody
-    public List<Comment> list(Integer currentPage, Integer pageSize,long source_id){
+    public List<Comment> list(Integer currentPage, Integer pageSize,long source_id,HttpServletResponse response){
+        cross(response);
         List<Comment> comments= commentService.listCommentByPage(currentPage,pageSize,source_id);
         return comments;
+    }
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -18,21 +19,24 @@ public class DepartmentController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(Department department){
+    public String add(Department department,HttpServletResponse response){
+        cross(response);
         departmentService.add(department);
         return "success!";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(int deptid){
+    public String delete(int deptid,HttpServletResponse response){
+        cross(response);
         departmentService.deletebyId(deptid);
         return "success!";
     }
 
     @RequestMapping("/select")
     @ResponseBody
-    public Department select(Department department){
+    public Department select(Department department,HttpServletResponse response){
+        cross(response);
         Department department1;
         department1=departmentService.select(department);
         return department1;
@@ -40,14 +44,16 @@ public class DepartmentController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(Department department){
+    public String update(Department department,HttpServletResponse response){
+        cross(response);
         departmentService.update(department);
         return "success!";
     }
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<Department> list1(){
+    public List<Department> list1(HttpServletResponse response){
+        cross(response);
         return departmentService.list();
     }
 
@@ -56,8 +62,14 @@ public class DepartmentController {
     * */
     @RequestMapping("/listDeptByPage")
     @ResponseBody
-    public List<Department> list(Integer currentPage, Integer pageSize){
+    public List<Department> list(Integer currentPage, Integer pageSize,HttpServletResponse response){
+        cross(response);
         return departmentService.listDeptByPage(currentPage,pageSize);
     }
 
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+    }
 }

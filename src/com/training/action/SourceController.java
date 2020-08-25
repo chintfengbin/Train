@@ -34,7 +34,8 @@ public class SourceController {
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
-    public String upload(@RequestParam(value = "file",required = false) CommonsMultipartFile file, @RequestParam(value = "bgpath",required = false) CommonsMultipartFile bgpath,HttpServletRequest request) throws IOException {
+    public String upload(@RequestParam(value = "file",required = false) CommonsMultipartFile file, @RequestParam(value = "bgpath",required = false) CommonsMultipartFile bgpath,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        cross(response);
         System.out.println("文件上传成功！");
         Source source=new Source();
         ModelAndView modelAndView=new ModelAndView();
@@ -103,8 +104,7 @@ public class SourceController {
     @ResponseBody
     public List<Source> listjson(HttpServletResponse response){
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
+       cross(response);
 
         List<Source> sources=sourceService.list();
        // JSONArray jsonArray2 = JSONArray.fromObject( sources );
@@ -115,7 +115,8 @@ public class SourceController {
 
     @RequestMapping("/listSourceByPage")
     @ResponseBody
-    public List<Source> listByPage(Integer currentPage,Integer pageSize){
+    public List<Source> listByPage(Integer currentPage,Integer pageSize,HttpServletResponse response){
+        cross(response);
         return sourceService.listSourceByPage(currentPage,pageSize);
     }
 
@@ -126,7 +127,8 @@ public class SourceController {
     * */
     @RequestMapping
     @ResponseBody
-    public List<Source> listSourceByDept(String deptname){
+    public List<Source> listSourceByDept(String deptname,HttpServletResponse response){
+        cross(response);
         List<Source> sources =sourceService.listSourceByDept(deptname);
         if (sources==null){
             return null;
@@ -148,5 +150,10 @@ public class SourceController {
             }
         }
         return filename;
+    }
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 }

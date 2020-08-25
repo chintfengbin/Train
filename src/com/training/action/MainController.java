@@ -19,8 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.training.common.core.controller.BaseController;
 
-
-
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -37,5 +36,8 @@ public class MainController extends BaseController
     	 return prefix + "/admin";
     }
 
-   
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+    }
 }

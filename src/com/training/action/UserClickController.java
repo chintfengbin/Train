@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/userclick")
 public class UserClickController {
@@ -14,13 +16,20 @@ public class UserClickController {
     UserClickService userClickService;
 
     @RequestMapping("/add")
-    public String add(UserClick userClick){
+    public String add(UserClick userClick,HttpServletResponse response){
+        cross(response);
         userClickService.add(userClick);
         return "success!";
     }
 
     @RequestMapping("/vdclicknum")
-    public long vdclicknum(long source_id){
+    public long vdclicknum(long source_id,HttpServletResponse response){
+        cross(response);
         return userClickService.vdclicknumb(source_id);
+    }
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 }

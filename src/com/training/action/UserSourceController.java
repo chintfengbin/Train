@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -21,22 +22,28 @@ public class UserSourceController {
         * */
     @RequestMapping("listUserSourceByPage")
     @ResponseBody
-    public List<UserSource> list(Integer currentPage,Integer pageSize){
+    public List<UserSource> list(Integer currentPage,Integer pageSize,HttpServletResponse response){
+        cross(response);
         return userSourceService.list(currentPage,pageSize);
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(UserSource userSource){
+    public String add(UserSource userSource,HttpServletResponse response){
+        cross(response);
         userSourceService.add(userSource);
         return "success!";
     }
 
     @RequestMapping("/deleteBySourceId")
     @ResponseBody
-    public String delete(long sourceid){
+    public String delete(long sourceid,HttpServletResponse response){
+        cross(response);
         userSourceService.deleteBySourceId(sourceid);
         return "success!";
     }
-
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+    }
 }
