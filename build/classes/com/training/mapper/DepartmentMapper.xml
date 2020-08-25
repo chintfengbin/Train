@@ -68,5 +68,4 @@
     <select id="list" resultType="com.training.model.Department">
         select * from department;
     </select>
-
 </mapper>

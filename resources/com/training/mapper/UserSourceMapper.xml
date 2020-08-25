@@ -2,5 +2,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.training.mapper.UserSourceMapper">
+<resultMap id="BaseResultMap" type="com.training.model.UserSource">
+    <id property="id" column="id"/>
+    <result property="userid" column="user_id"/>
+    <result property="sourceid" column="source_id"/>
+    <result property="remark" column="remark"/>
+</resultMap>
+    <select id="list" resultMap="BaseResultMap">
+        select * from user_source;
+    </select>
+
+    <insert id="add" parameterType="com.training.model.UserSource">
+        insert into user_source (user_id,source_id,remark) values (#{userid},#{sourceid},#{remark});
+    </insert>
+
+    <delete id="deleteBySourceId" parameterType="long">
+        delete from user_source where source_id = #{sourceid};
+    </delete>
 
 </mapper>

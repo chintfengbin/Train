@@ -45,14 +45,19 @@ public class DepartmentController {
         return "success!";
     }
 
+    @RequestMapping("/list")
+    @ResponseBody
+    public List<Department> list1(){
+        return departmentService.list();
+    }
 
     /*
     * 查询部门列表
     * */
     @RequestMapping("/listDeptByPage")
     @ResponseBody
-    public List<Department> list(){
-        return departmentService.list();
+    public List<Department> list(Integer currentPage, Integer pageSize){
+        return departmentService.listDeptByPage(currentPage,pageSize);
     }
 
 }

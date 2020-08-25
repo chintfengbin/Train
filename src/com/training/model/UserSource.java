@@ -1,8 +1,9 @@
 package com.training.model;
 
 public class UserSource {
-    private String userid;
-    private String sourceid;
+    private long id;
+    private long userid;
+    private long sourceid;
     private String remark;
 
     @Override
@@ -14,19 +15,27 @@ public class UserSource {
                 '}';
     }
 
-    public String getUserid() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(long userid) {
         this.userid = userid;
     }
 
-    public String getSourceid() {
+    public long getSourceid() {
         return sourceid;
     }
 
-    public void setSourceid(String sourceid) {
+    public void setSourceid(long sourceid) {
         this.sourceid = sourceid;
     }
 
