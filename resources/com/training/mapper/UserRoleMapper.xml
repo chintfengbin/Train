@@ -2,4 +2,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.training.mapper.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.training.model.UserRole">
+        <id column="id" property="id"/>
+        <result column="role_id" property="role_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.training.model.UserRole">
+        insert into user_role (role_id, user_id, remark) values (#{role_id}, #{user_id}, #{remark});
+    </insert>
+
+<!--    <update id="update" parameterType="com.training.model.UserRole" >
+        update user_role set
+        <trim suffixOverrides="," suffix=""
+    </update>-->
 </mapper>
