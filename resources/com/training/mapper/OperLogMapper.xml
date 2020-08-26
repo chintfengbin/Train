@@ -1,0 +1,181 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.OperLogMapper">
+    <resultMap id="BaseResultMap" type="com.training.model.OperLog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="bussiness_type" column="bussiness_type"/>
+        <result property="method" column="method"/>
+        <result property="request_method" column="request_method"/>
+        <result property="operator_type" column="operator_type"/>
+        <result property="oper_name" column="oper_name"/>
+        <result property="dept_name" column="dept_name"/>
+        <result property="oper_url" column="oper_url"/>
+        <result property="oper_ip" column="oper_ip"/>
+        <result property="oper_location" column="oper_location"/>
+        <result property="oper_param" column="oper_param"/>
+        <result property="json_result" column="json_result"/>
+        <result property="status" column="status"/>
+        <result property="error_msg" column="error_msg"/>
+        <result property="oper_time" column="oper_time"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.training.model.OperLog">
+        insert into oper_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                title,
+            </if>
+            <if test="bussiness_type != null">
+                bussiness_type,
+            </if>
+            <if test="method != null">
+                method,
+            </if>
+            <if test="request_method != null">
+                request_method,
+            </if>
+            <if test="operator_type != null">
+                operator_type,
+            </if>
+            <if test="oper_name != null">
+                oper_name,
+            </if>
+            <if test="dept_name != null">
+                dept_name,
+            </if>
+            <if test="oper_url != null">
+                oper_url,
+            </if>
+            <if test="oper_ip != null">
+                oper_ip,
+            </if>
+            <if test="oper_location != null">
+                oper_location,
+            </if>
+            <if test="oper_param != null">
+                oper_param,
+            </if>
+            <if test="json_result != null">
+                json_result,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="error_msg != null">
+                error_msg,
+            </if>
+            <if test="oper_time != null">
+                oper_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="bussiness_type != null">
+                #{bussiness_type},
+            </if>
+            <if test="method != null">
+                #{method},
+            </if>
+            <if test="request_method != null">
+                #{request_method},
+            </if>
+            <if test="operator_type != null">
+                #{operator_type},
+            </if>
+            <if test="oper_name != null">
+                #{oper_name},
+            </if>
+            <if test="dept_name != null">
+                #{dept_name},
+            </if>
+            <if test="oper_url != null">
+                #{oper_url},
+            </if>
+            <if test="oper_ip != null">
+                #{oper_ip},
+            </if>
+            <if test="oper_location != null">
+                #{oper_location},
+            </if>
+            <if test="oper_param != null">
+                #{oper_param},
+            </if>
+            <if test="json_result != null">
+                #{json_result},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="error_msg != null">
+                #{error_msg},
+            </if>
+            <if test="oper_time != null">
+                #{oper_time},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        delete from oper_log where id= #{id};
+    </delete>
+
+    <update id="update" parameterType="com.training.model.OperLog">
+        update oper_log
+        <set>
+            <if test="title != null">
+                title=  #{title},
+            </if>
+            <if test="bussiness_type != null">
+                bussiness_type=  #{bussiness_type},
+            </if>
+            <if test="method != null">
+                method=  #{method},
+            </if>
+            <if test="request_method != null">
+                request_method=  #{request_method},
+            </if>
+            <if test="operator_type != null">
+                operator_type= #{operator_type},
+            </if>
+            <if test="oper_name != null">
+                oper_name= #{oper_name},
+            </if>
+            <if test="dept_name != null">
+                dept_name=  #{dept_name},
+            </if>
+            <if test="oper_url != null">
+                oper_url= #{oper_url},
+            </if>
+            <if test="oper_ip != null">
+                oper_ip=  #{oper_ip},
+            </if>
+            <if test="oper_location != null">
+                oper_location= #{oper_location},
+            </if>
+            <if test="oper_param != null">
+                oper_param=  #{oper_param},
+            </if>
+            <if test="json_result != null">
+                json_result=   #{json_result},
+            </if>
+            <if test="status != null">
+                status= #{status},
+            </if>
+            <if test="error_msg != null">
+                error_msg= #{error_msg},
+            </if>
+            <if test="oper_time != null">
+                oper_time= #{oper_time},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="list" resultMap="BaseResultMap">
+        select * from oper_log;
+    </select>
+</mapper>
