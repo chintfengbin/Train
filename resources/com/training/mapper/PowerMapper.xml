@@ -1,0 +1,42 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.PowerMapper">
+    <resultMap id="BaseResultMap" type="com.training.model.Power">
+        <id column="id" property="id"/>
+        <result property="powername" column="powername"/>
+        <result property="powervalue" column="powervalue"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.training.model.Power">
+        insert into power
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="powername != null">
+                powername,
+            </if>
+            <if test="powervalue != null">
+                powervalue,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="powername != null">
+                #{powername},
+            </if>
+            <if test="powervalue != null">
+                #{powervalue},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="list" resultMap="BaseResultMap">
+        select * from power;
+    </select>
+</mapper>
