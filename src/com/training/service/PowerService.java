@@ -1,5 +1,6 @@
 package com.training.service;
 
+import com.training.model.PageInfo;
 import com.training.model.Power;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface PowerService {
 
     void update(Power power);
 
-    List<Power> listPowerByPage(Integer currentPage, Integer pageSize);
+    PageInfo<Power> listPowerByPage(Integer currentPage, Integer pageSize);
 }

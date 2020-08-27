@@ -1,5 +1,6 @@
 package com.training.service.impl;
 
+import com.github.pagehelper.Page;
 import com.training.common.utils.SpratePage;
 import com.training.mapper.UserMapper;
 import com.training.model.PageInfo;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> listUserByPage(Integer currentPage, Integer pageSize) {
+    public PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize) {
         List<User> users=userMapper.list();
         return spratePage.sparate(currentPage,pageSize,users);
     }

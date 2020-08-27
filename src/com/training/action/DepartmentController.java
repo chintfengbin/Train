@@ -1,6 +1,7 @@
 package com.training.action;
 
 import com.training.model.Department;
+import com.training.model.PageInfo;
 import com.training.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,7 @@ public class DepartmentController {
     * */
     @RequestMapping("/listDeptByPage")
     @ResponseBody
-    public List<Department> list(Integer currentPage, Integer pageSize,HttpServletResponse response){
+    public PageInfo<Department> list(Integer currentPage, Integer pageSize, HttpServletResponse response){
         cross(response);
         return departmentService.listDeptByPage(currentPage,pageSize);
     }

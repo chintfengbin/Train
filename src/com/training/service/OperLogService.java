@@ -1,6 +1,7 @@
 package com.training.service;
 
 import com.training.model.OperLog;
+import com.training.model.PageInfo;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface OperLogService {
 
     void update(OperLog operLog);
 
-    List<OperLog> listOperLogByPage(Integer currentPage,Integer pageSize);
+    PageInfo<OperLog> listOperLogByPage(Integer currentPage, Integer pageSize);
 }

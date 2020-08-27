@@ -1,5 +1,6 @@
 package com.training.action;
 
+import com.training.model.PageInfo;
 import com.training.model.Power;
 import com.training.service.PowerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class PowerController {
 
     @RequestMapping("listPowerByPage")
     @ResponseBody
-    public List<Power> list(Integer currentPage,Integer pageSize){
+    public PageInfo<Power> list(Integer currentPage, Integer pageSize){
        return powerService.listPowerByPage(currentPage,pageSize);
     }
 }

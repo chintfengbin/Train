@@ -1,5 +1,6 @@
 package com.training.service;
 
+import com.training.model.PageInfo;
 import com.training.model.UserRole;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface UserRoleService {
 
     void add(UserRole userRole);
-    List<UserRole> listUserRoleByPage(Integer currentPage,Integer pageSize);
+    PageInfo<UserRole> listUserRoleByPage(Integer currentPage, Integer pageSize);
     void update(UserRole userRole);
     void delete(long id);
 }

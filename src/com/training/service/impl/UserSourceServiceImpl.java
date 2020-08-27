@@ -2,6 +2,7 @@ package com.training.service.impl;
 
 import com.training.common.utils.SpratePage;
 import com.training.mapper.UserSourceMapper;
+import com.training.model.PageInfo;
 import com.training.model.UserSource;
 import com.training.service.UserSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserSourceServiceImpl implements UserSourceService {
     SpratePage<UserSource> spratePage;
 
     @Override
-    public List<UserSource> list(Integer currentPage, Integer pageSize) {
+    public PageInfo<UserSource> list(Integer currentPage, Integer pageSize) {
        List<UserSource> userSources =userSourceMapper.list();
        return  spratePage.sparate(currentPage,pageSize,userSources);
     }

@@ -40,7 +40,7 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public List<Source> listSourceByPage(Integer currentPage,Integer pageSize){
+    public PageInfo<Source> listSourceByPage(Integer currentPage,Integer pageSize){
         List<Source> sources = sourceMapper.list();
         return  spratePage.sparate(currentPage,pageSize,sources);
 /*

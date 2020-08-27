@@ -1,6 +1,7 @@
 package com.training.action;
 
 import com.training.model.OperLog;
+import com.training.model.PageInfo;
 import com.training.service.OperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,7 @@ public class OperLogController {
 
     @RequestMapping("/listOperLogByPage")
     @ResponseBody
-    public List<OperLog> list(Integer currentPage,Integer pageSize,HttpServletResponse response){
+    public PageInfo<OperLog> list(Integer currentPage, Integer pageSize, HttpServletResponse response){
         cross(response);
         return operLogService.listOperLogByPage(currentPage,pageSize);
     }

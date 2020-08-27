@@ -1,5 +1,6 @@
 package com.training.service;
 
+import com.github.pagehelper.Page;
 import com.training.model.PageInfo;
 import com.training.model.User;
 
@@ -18,5 +19,5 @@ public interface UserService {
 
     User userinf(long id);
 
-    List<User> listUserByPage(Integer currentPage,Integer pageSize);
+    PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize);
 }

@@ -2,6 +2,7 @@ package com.training.service.impl;
 
 import com.training.common.utils.SpratePage;
 import com.training.mapper.UserRoleMapper;
+import com.training.model.PageInfo;
 import com.training.model.UserRole;
 import com.training.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public List<UserRole> listUserRoleByPage(Integer currentPage, Integer pageSize) {
+    public PageInfo<UserRole> listUserRoleByPage(Integer currentPage, Integer pageSize) {
         List<UserRole> userRoles =userRoleMapper.list();
         return spratePage.sparate(currentPage,pageSize,userRoles);
     }

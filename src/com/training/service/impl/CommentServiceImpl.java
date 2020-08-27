@@ -3,6 +3,7 @@ package com.training.service.impl;
 import com.training.common.utils.SpratePage;
 import com.training.mapper.CommentMapper;
 import com.training.model.Comment;
+import com.training.model.PageInfo;
 import com.training.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> listCommentByPage(Integer currentPage, Integer pageSize,long source_id) {
+    public PageInfo<Comment> listCommentByPage(Integer currentPage, Integer pageSize, long source_id) {
         List<Comment> comments=commentMapper.getCommentBySource(source_id);
         return spratePage.sparate(currentPage,pageSize,comments);
     }

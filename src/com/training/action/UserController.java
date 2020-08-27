@@ -68,7 +68,7 @@ public class UserController {
 
     @RequestMapping("/listUserByPage")
     @ResponseBody
-    public List<User> listByPage(Integer currentPage,Integer pageSize,HttpServletResponse response){
+    public PageInfo<User> listByPage(Integer currentPage, Integer pageSize, HttpServletResponse response){
         cross(response);
         return userService.listUserByPage(currentPage,pageSize);
     }

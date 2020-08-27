@@ -1,6 +1,7 @@
 package com.training.action;
 
 import com.training.model.Comment;
+import com.training.model.PageInfo;
 import com.training.service.impl.CommentServiceImpl;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,9 @@ public class CommentController {
 
     @RequestMapping("/listCommentByPage")
     @ResponseBody
-    public List<Comment> list(Integer currentPage, Integer pageSize,long source_id,HttpServletResponse response){
+    public PageInfo<Comment> list(Integer currentPage, Integer pageSize, long source_id, HttpServletResponse response){
         cross(response);
-        List<Comment> comments= commentService.listCommentByPage(currentPage,pageSize,source_id);
+        PageInfo<Comment> comments= commentService.listCommentByPage(currentPage,pageSize,source_id);
         return comments;
     }
 

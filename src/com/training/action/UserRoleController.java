@@ -1,6 +1,7 @@
 package com.training.action;
 
 
+import com.training.model.PageInfo;
 import com.training.model.UserRole;
 import com.training.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class UserRoleController {
 
     @RequestMapping("/listUserRoleByPage")
     @ResponseBody
-    public List<UserRole> list(Integer currentPage,Integer pageSize,HttpServletResponse response){
+    public PageInfo<UserRole> list(Integer currentPage, Integer pageSize, HttpServletResponse response){
         cross(response);
         return userRoleService.listUserRoleByPage(currentPage,pageSize);
     }

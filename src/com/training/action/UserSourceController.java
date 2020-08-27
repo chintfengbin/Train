@@ -1,5 +1,6 @@
 package com.training.action;
 
+import com.training.model.PageInfo;
 import com.training.model.UserSource;
 import com.training.service.UserSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserSourceController {
         * */
     @RequestMapping("listUserSourceByPage")
     @ResponseBody
-    public List<UserSource> list(Integer currentPage,Integer pageSize,HttpServletResponse response){
+    public PageInfo<UserSource> list(Integer currentPage, Integer pageSize, HttpServletResponse response){
         cross(response);
         return userSourceService.list(currentPage,pageSize);
     }

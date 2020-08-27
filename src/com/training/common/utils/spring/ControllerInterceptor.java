@@ -30,15 +30,12 @@ public class ControllerInterceptor implements HandlerInterceptor{
 
 	private List<String> ignoreList = Arrays.asList(
 			"/login/index",
-			"/source/uploadpage",
 			"/source/list",
 			"/source/listjson",
 			"/source/uploade",
 			"/user/addpage",
 			"/user/add",
 			"/login/check"
-			
-			
 	);
 	
 	//========================================================================

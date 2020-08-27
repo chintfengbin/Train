@@ -2,6 +2,7 @@ package com.training.service.impl;
 
 import com.training.common.utils.SpratePage;
 import com.training.mapper.PowerMapper;
+import com.training.model.PageInfo;
 import com.training.model.Power;
 import com.training.service.PowerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class PowerServiceImpl implements PowerService {
     }
 
     @Override
-    public List<Power> listPowerByPage(Integer currentPage, Integer pageSize) {
+    public PageInfo<Power> listPowerByPage(Integer currentPage, Integer pageSize) {
         List<Power> powers = powerMapper.list();
         return spratePage.sparate(currentPage,pageSize,powers);
     }

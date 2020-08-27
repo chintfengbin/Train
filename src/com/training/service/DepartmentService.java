@@ -1,6 +1,7 @@
 package com.training.service;
 
 import com.training.model.Department;
+import com.training.model.PageInfo;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface DepartmentService {
     void update(Department department);
 
     List<Department> list();
-    List<Department> listDeptByPage(Integer currentPage,Integer pageSize);
+    PageInfo<Department> listDeptByPage(Integer currentPage, Integer pageSize);
 }
