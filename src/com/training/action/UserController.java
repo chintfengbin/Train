@@ -34,21 +34,21 @@ public class UserController {
             userService.deleteById(user1.getId());
             userService.add(user);
         }
-        return"false!";
+        return"success!";
     }
 
     @RequestMapping("/delete")
     public String delete(long id,HttpServletResponse response){
         cross(response);
         userService.deleteById(id);
-        return "删除成功";
+        return "success!";
     }
 
     @RequestMapping("/update")
     public String upadte(User user,HttpServletResponse response){
         cross(response);
         userService.update(user);
-        return "修改成功";
+        return "success!";
     }
 
     @RequestMapping("/list")
