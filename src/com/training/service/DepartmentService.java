@@ -8,11 +8,11 @@ import java.util.List;
 public interface DepartmentService {
     Department select(Department department);
 
-    void deletebyId(int deptid);
+    void deletebyId(long id);
 
     void add(Department department);
     void update(Department department);
 
-    List<Department> list();
-    PageInfo<Department> listDeptByPage(Integer currentPage, Integer pageSize);
+    List<Department> list(String condition);
+    PageInfo<Department> listDeptByPage(Integer currentPage, Integer pageSize,String condition);
 }

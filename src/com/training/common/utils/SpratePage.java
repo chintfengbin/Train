@@ -26,10 +26,5 @@ public class SpratePage<T> {
             pageInfo1.setList(list);
             return pageInfo1;
         }
-//        if(currentPage==pageInfo.getTotalPage())
-//            pageInfo.setList(list.subList((currentPage-1)*pageSize, list.size()));
-//        else
-//            pageInfo.setList(list.subList((currentPage-1)*pageSize, (currentPage-1)*pageSize+pageSize));
-//        return pageInfo;
     }
 }

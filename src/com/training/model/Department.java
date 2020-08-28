@@ -4,15 +4,7 @@ public class Department {
     private long id;
     private String deptname;
     private String remark;
-    private long deptid;
 
-    public long getDeptid() {
-        return deptid;
-    }
-
-    public void setDeptid(long deptid) {
-        this.deptid = deptid;
-    }
 
     public long getId() {
         return id;

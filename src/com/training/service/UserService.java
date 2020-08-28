@@ -7,7 +7,7 @@ import com.training.model.User;
 import java.util.List;
 
 public interface UserService {
-     List<User> list() ;
+     List<User> list(String condition) ;
 
     void add(User user);
 
@@ -19,5 +19,5 @@ public interface UserService {
 
     User userinf(long id);
 
-    PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize);
+    PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize,String condition);
 }

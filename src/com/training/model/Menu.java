@@ -1,13 +1,13 @@
 package com.training.model;
 
-public class menu {
+public class Menu {
     private long id;
-    private String menuname;
-    private String upmenu;
-    private String menutype;
-    private String location;
-    private String needforce;
-    private String menulogo;
+    private String menuname;//菜单名
+    private String upmenu;//父级菜单
+    private String menutype;//菜单类型
+    private String location;//位置
+    private String needforce;//是否需要权限
+    private String menulogo;//图标
 
     public long getId() {
         return id;

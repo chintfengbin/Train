@@ -28,9 +28,9 @@ public class DepartmentController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(int deptid,HttpServletResponse response){
+    public String delete(long id,HttpServletResponse response){
         cross(response);
-        departmentService.deletebyId(deptid);
+        departmentService.deletebyId(id);
         return "success!";
     }
 
@@ -51,21 +51,21 @@ public class DepartmentController {
         return "success!";
     }
 
-    @RequestMapping("/list")
+ /*   @RequestMapping("/list")
     @ResponseBody
     public List<Department> list1(HttpServletResponse response){
         cross(response);
         return departmentService.list();
-    }
+    }*/
 
     /*
     * 查询部门列表
     * */
     @RequestMapping("/listDeptByPage")
     @ResponseBody
-    public PageInfo<Department> list(Integer currentPage, Integer pageSize, HttpServletResponse response){
+    public PageInfo<Department> list(Integer currentPage, Integer pageSize, HttpServletResponse response,String condition){
         cross(response);
-        return departmentService.listDeptByPage(currentPage,pageSize);
+        return departmentService.listDeptByPage(currentPage,pageSize,condition);
     }
 
 

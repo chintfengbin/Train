@@ -31,13 +31,18 @@ public class UserController {
             return "success!";
         }
         else {
-            userService.deleteById(user1.getId());
-            userService.add(user);
+            Integer id=user1.getId();
+            System.out.println(id);
+            user.setId(id);
+            userService.update(user);
+//            userService.deleteById(user1.getId());
+//            userService.add(user);
         }
         return"success!";
     }
 
     @RequestMapping("/delete")
+    @ResponseBody
     public String delete(long id,HttpServletResponse response){
         cross(response);
         userService.deleteById(id);
@@ -45,6 +50,7 @@ public class UserController {
     }
 
     @RequestMapping("/update")
+    @ResponseBody
     public String upadte(User user,HttpServletResponse response){
         cross(response);
         userService.update(user);
@@ -53,9 +59,9 @@ public class UserController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<User> list(HttpServletResponse response){
+    public List<User> list(HttpServletResponse response,String condition){
         cross(response);
-        List<User> users=userService.list();
+        List<User> users=userService.list(condition);
         return users;
     }
 
@@ -68,9 +74,9 @@ public class UserController {
 
     @RequestMapping("/listUserByPage")
     @ResponseBody
-    public PageInfo<User> listByPage(Integer currentPage, Integer pageSize, HttpServletResponse response){
+    public PageInfo<User> listByPage(Integer currentPage, Integer pageSize, HttpServletResponse response,String condition){
         cross(response);
-        return userService.listUserByPage(currentPage,pageSize);
+        return userService.listUserByPage(currentPage,pageSize,condition);
     }
 
     public void cross(HttpServletResponse response){

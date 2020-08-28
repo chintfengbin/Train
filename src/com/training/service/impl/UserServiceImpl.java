@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize) {
-        List<User> users=userMapper.list();
+    public PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize,String condition) {
+        List<User> users=userMapper.list(condition);
         return spratePage.sparate(currentPage,pageSize,users);
     }
 
     @Override
-    public List<User> list() {
-        return userMapper.list();
+    public List<User> list(String condition) {
+        return userMapper.list(condition);
     }
 }

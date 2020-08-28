@@ -7,24 +7,12 @@ import java.util.List;
 public interface UserMapper {
 
 
-     List<User> list();
+     List<User> list(String condition);
 
-    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
-    int insertSelective(User record);
 
-
-    User selectByPrimaryKey(Integer id);
-
-
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKeyWithBLOBs(User record);
-
-    int updateByPrimaryKey(User record);
 
     User selectByName(String name);
 

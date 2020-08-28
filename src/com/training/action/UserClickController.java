@@ -5,6 +5,7 @@ import com.training.service.UserClickService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +17,7 @@ public class UserClickController {
     UserClickService userClickService;
 
     @RequestMapping("/add")
+    @ResponseBody
     public String add(UserClick userClick,HttpServletResponse response){
         cross(response);
         userClickService.add(userClick);
@@ -23,6 +25,7 @@ public class UserClickController {
     }
 
     @RequestMapping("/vdclicknum")
+    @ResponseBody
     public long vdclicknum(long source_id,HttpServletResponse response){
         cross(response);
         return userClickService.vdclicknumb(source_id);

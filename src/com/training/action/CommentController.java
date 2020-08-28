@@ -35,6 +35,7 @@ public class CommentController {
         return "success!";
     }
     @RequestMapping("/select")
+    @ResponseBody
     public List<Comment> select(long source_id,HttpServletResponse response){
         cross(response);
         return commentService.getCommentBySource(source_id);

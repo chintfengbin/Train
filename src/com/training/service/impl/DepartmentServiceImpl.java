@@ -25,8 +25,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deletebyId(int deptid) {
-        departmentMapper.deleteById(deptid);
+    public void deletebyId(long id) {
+        departmentMapper.deleteById(id);
     }
 
     @Override
@@ -40,13 +40,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> list() {
-        return departmentMapper.list();
+    public List<Department> list(String condition) {
+        return departmentMapper.list(condition);
     }
 
     @Override
-    public PageInfo<Department> listDeptByPage(Integer currentPage, Integer pageSize) {
-        List<Department> departments=departmentMapper.list();
+    public PageInfo<Department> listDeptByPage(Integer currentPage, Integer pageSize,String condition) {
+        List<Department> departments=departmentMapper.list(condition);
         return spratePage.sparate(currentPage,pageSize,departments);
     }
 }

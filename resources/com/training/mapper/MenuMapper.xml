@@ -1,0 +1,92 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.training.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.training.model.Menu">
+        <id column="id" property="id"/>
+        <result column="menuname" property="menuname"/>
+        <result column="upmenu" property="upmenu"/>
+        <result column="menutype" property="menutype"/>
+        <result column="location" property="location"/>
+        <result column="needforce" property="needforce"/>
+        <result column="menulogo" property="menulogo"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.training.model.Menu">
+        insert into menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuname != null">
+                menuname,
+            </if>
+            <if test="upmenu != null">
+                upmenu,
+            </if>
+            <if test="menutype != null">
+                menutype,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="needforce != null">
+                needforce,
+            </if>
+            <if test="menulogo != null">
+                menulogo,
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuname != null">
+                #{menuname},
+            </if>
+            <if test="upmenu != null">
+                #{upmenu},
+            </if>
+            <if test="menutype != null">
+                #{menutype},
+            </if>
+            <if test="location != null">
+                #{location},
+            </if>
+            <if test="needforce != null">
+                #{needforce},
+            </if>
+            <if test="menulogo != null">
+                #{menulogo},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        delete from menu where id = #{id};
+    </delete>
+
+    <update id="update" parameterType="com.training.model.Menu">
+        update menu
+        <set>
+            <if test="menuname != null">
+                menuname = #{menuname},
+            </if>
+            <if test="upmenu != null">
+                upmenu = #{upmenu},
+            </if>
+            <if test="menutype != null">
+                menutype = #{menutype},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+            <if test="needforce != null">
+                needforce = #{needforce},
+            </if>
+            <if test="menulogo != null">
+                menulogo = #{menulogo},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <select id="listByUpMenu" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from menu where upmenu = #{upmenu};
+    </select>
+</mapper>

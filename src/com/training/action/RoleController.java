@@ -7,6 +7,7 @@ import com.training.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +19,7 @@ public class RoleController {
     RoleService roleService;
 
     @RequestMapping("/add")
+    @ResponseBody
     public String add(Role role,HttpServletResponse response){
         cross(response);
         roleService.add(role);
@@ -25,6 +27,7 @@ public class RoleController {
     }
 
     @RequestMapping("/delete")
+    @ResponseBody
     public String delete(int id,HttpServletResponse response){
         cross(response);
         roleService.deletebyId(id);
@@ -32,6 +35,7 @@ public class RoleController {
     }
 
     @RequestMapping("/select")
+    @ResponseBody
     public Role select(Role role,HttpServletResponse response){
         cross(response);
         Role role1;
@@ -41,6 +45,7 @@ public class RoleController {
 
 
     @RequestMapping("/update")
+    @ResponseBody
     public String update(Role role,HttpServletResponse response){
         cross(response);
         roleService.update(role);
