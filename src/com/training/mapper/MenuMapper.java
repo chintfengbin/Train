@@ -12,4 +12,6 @@ public interface MenuMapper {
     void update(Menu menu);
 
     List<Menu> listByUpMenu(String menuname);
+
+    List<Menu> listAllMenu();
 }

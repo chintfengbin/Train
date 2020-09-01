@@ -12,6 +12,9 @@
         <result column="menulogo" property="menulogo"/>
     </resultMap>
 
+    <select id="listAllMenu" resultMap="BaseResultMap">
+        select * from menu;
+    </select>
     <insert id="add" parameterType="com.training.model.Menu">
         insert into menu
         <trim prefix="(" suffix=")" suffixOverrides=",">

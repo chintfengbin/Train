@@ -13,6 +13,10 @@
     <result column="dep_id" jdbcType="INTEGER" property="dep_id" />
   </resultMap>
 
+    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from sys_user where id= #{id};
+    </select>
+
   <select id="selectByName" resultType="com.training.model.User" parameterType="String">
     select * from sys_user where username=#{name};
   </select>

@@ -3,12 +3,13 @@ package com.training.action;
 import com.training.model.PageInfo;
 import com.training.model.Source;
 import com.training.service.SourceService;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,6 @@ public class SourceController {
         cross(response);
         System.out.println("文件上传成功！");
         Source source=new Source();
-        ModelAndView modelAndView=new ModelAndView();
         source.setTitle(request.getParameter("title"));
         source.setType(request.getParameter("type"));
         source.setExplain(request.getParameter("explain"));
@@ -51,7 +51,8 @@ public class SourceController {
         String res = sdf.format(new Date());
         // uploads文件夹位置
        // String rootPath = request.getSession().getServletContext().getRealPath("WEB-INF/upload");
-        String rootPath ="E:\\project\\Train\\Train\\WebContent\\upload";
+        /*String rootPath ="E:\\project\\Train\\Train\\WebContent\\upload";*/
+        String rootPath ="E:\\upload";
         // 原始名称
         String originalFileName = file.getOriginalFilename();
         String originalImageName = bgpath.getOriginalFilename();
@@ -87,29 +88,12 @@ public class SourceController {
         return "success！";
     }
 
-/*    @RequestMapping("/list")
-    public ModelAndView list(){
-        List<Source> sources=sourceService.list();
-        for (Source s:sources){
-            System.out.println(s);
-        }
-//       List<String> filename= find(new File("E:\\project\\Train\\Train\\WebContent\\upload"));
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("file/sourcelist");
-        modelAndView.addObject("sources",sourceService.list());
-        return modelAndView;
-    }*/
 
     @RequestMapping("/listjson")
     @ResponseBody
     public List<Source> listjson(HttpServletResponse response){
-
-       cross(response);
-
+        cross(response);
         List<Source> sources=sourceService.list();
-       // JSONArray jsonArray2 = JSONArray.fromObject( sources );
-       // System.out.println(jsonArray2);
-       // return jsonArray2;
         return sources;
     }
 
@@ -120,22 +104,13 @@ public class SourceController {
         return sourceService.listSourceByPage(currentPage,pageSize);
     }
 
-
-    /*
-    * 根据部门查询资源列表
-    *
-    * */
-    @RequestMapping
+    @RequestMapping("/listSourceByDept")
     @ResponseBody
-    public List<Source> listSourceByDept(String deptname,HttpServletResponse response){
-        cross(response);
-        List<Source> sources =sourceService.listSourceByDept(deptname);
-        if (sources==null){
-            return null;
-        }else {
-            return sources;
-        }
+    public PageInfo<Source> listByDept(Integer currentPage,Integer pageSize,String deptname,HttpServletRequest request){
+        return sourceService.listSourceByDept(currentPage,pageSize,deptname);
     }
+
+
     public List<String> find(File file) {
         File[] file1 = file.listFiles();
         List<String> filename=new ArrayList<>();

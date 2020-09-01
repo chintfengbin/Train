@@ -13,5 +13,7 @@ public interface MenuService {
     void update(Menu menu);
 
     List<Menu> listByUpMenu(String menuname);
+
+    List<Menu> listAllMenu();
 }
 

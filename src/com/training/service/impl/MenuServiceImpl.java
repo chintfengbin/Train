@@ -28,4 +28,9 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> listByUpMenu(String upmenu){
         return menuMapper.listByUpMenu(upmenu);
     }
+
+    @Override
+    public List<Menu> listAllMenu() {
+        return menuMapper.listAllMenu();
+    }
 }

@@ -51,10 +51,12 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public String upadte(User user,HttpServletResponse response){
+    public User upadte(User user,HttpServletResponse response){
         cross(response);
+        Integer id=user.getId();
         userService.update(user);
-        return "success!";
+        User user1=userService.getById(id);
+        return user1;
     }
 
     @RequestMapping("/list")

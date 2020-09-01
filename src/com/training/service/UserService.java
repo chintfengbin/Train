@@ -20,4 +20,6 @@ public interface UserService {
     User userinf(long id);
 
     PageInfo<User> listUserByPage(Integer currentPage, Integer pageSize,String condition);
+
+    User getById(Integer id);
 }

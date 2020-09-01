@@ -99,6 +99,4 @@
 --     select id,title,filetype,location,uploadtime,bgpath,deptname from source;
         select * from source
   </select>
-
-
 </mapper>

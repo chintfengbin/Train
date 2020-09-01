@@ -2,8 +2,8 @@ package com.training.model;
 
 public class Power {
     private long id;
-    private String powername;
-    private String powervalue;
+    private String powername;//权限名
+    private String powervalue;//权限值
     private String remark;
 
     public String getRemark() {

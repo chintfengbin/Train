@@ -23,4 +23,6 @@ public interface UserMapper {
     void update(User user);
 
     User userInf(long id);
+
+    User getById(Integer id);
 }

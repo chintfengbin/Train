@@ -30,8 +30,9 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public List<Source> listSourceByDept(String deptname) {
-        return sourceMapper.listSourceByDept(deptname);
+    public PageInfo<Source> listSourceByDept(Integer currentPage,Integer pageSize,String deptname) {
+        List<Source> sources=sourceMapper.listSourceByDept(deptname);
+        return spratePage.sparate(currentPage,pageSize,sources);
     }
 
     @Override

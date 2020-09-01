@@ -9,7 +9,6 @@
 <!--            <if test="id != null and id!='' ">and id = #{id} </if>-->
             <if test="deptname !=null and deptname !='' ">and deptname = #{deptname}</if>
             <if test="remark != null and remark != ''">and remark = #{remark}</if>
-            <if test="deptid != null and deptid != ''"> and deptid = #{deptid}</if>
         </where>
     </select>
 
@@ -25,9 +24,6 @@
             <if test="remark != null">
                 remark,
             </if>
-            <if test="deptid != null">
-                deptid,
-            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 <!--            <if test="id != null">-->
@@ -39,14 +35,11 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="deptid != null">
-                #{deptid,jdbcType=INTEGER},
-            </if>
         </trim>
     </insert>
 
     <delete id="deleteById" parameterType="long">
-        delete from department where deptid= #{deptid};
+        delete from department where id= #{id};
     </delete>
 
     <update id="update" parameterType="com.training.model.Department">
@@ -58,14 +51,16 @@
             <if test="remark != null">
                 remark = #{remark},
             </if>
-            <if test="deptid != null">
-                deptid = #{remark},
-            </if>
         </set>
         where id=#{id};
     </update>
 
-    <select id="list" resultType="com.training.model.Department">
-        select * from department;
+    <select id="list" resultType="com.training.model.Department" parameterType="java.lang.String">
+        select * from department
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                deptname like concat('%',#{condition},'%')
+            </if>
+        </where>
     </select>
 </mapper>

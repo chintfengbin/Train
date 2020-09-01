@@ -12,5 +12,6 @@ public interface SourceService {
 
      void add(Source source);
 
-    List<Source> listSourceByDept(String deptname);
+    PageInfo<Source> listSourceByDept(Integer currentPage,Integer pageSize,String deptname);
+
 }

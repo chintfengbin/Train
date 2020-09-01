@@ -31,14 +31,14 @@ public class PowerController {
         return "success!";
     }
 
-    @RequestMapping("update")
+    @RequestMapping("/update")
     @ResponseBody
     public String update(Power power){
         powerService.update(power);
         return "success!";
     }
 
-    @RequestMapping("listPowerByPage")
+    @RequestMapping("/listPowerByPage")
     @ResponseBody
     public PageInfo<Power> list(Integer currentPage, Integer pageSize){
        return powerService.listPowerByPage(currentPage,pageSize);

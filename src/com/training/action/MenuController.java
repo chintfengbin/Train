@@ -38,6 +38,11 @@ public class MenuController {
         return "success!";
     }
 
+    @RequestMapping("/listAllMenu")
+    @ResponseBody
+    public List<Menu> listAll(){
+        return menuService.listAllMenu();
+    }
     @RequestMapping("/listByUpMenu")
     @ResponseBody
     public List<Menu> list(String upmenu){
