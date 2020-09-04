@@ -14,4 +14,6 @@ public interface CommentService {
     List<Comment> getCommentBySource(long source_id);
 
     PageInfo<Comment> listCommentByPage(Integer currentPage, Integer pageSize, long source_id);
+
+    PageInfo<Comment> listAll(Integer currentPage, Integer pageSize, long condition);
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Comment {
     private long id;
     private long user_id;
-    private Date cmtime;
+    private String cmtime;
     private String cmcontent;
     private String remark;
     private long source_id;
@@ -46,11 +46,11 @@ public class Comment {
         this.user_id = user_id;
     }
 
-    public Date getCmtime() {
+    public String getCmtime() {
         return cmtime;
     }
 
-    public void setCmtime(Date cmtime) {
+    public void setCmtime(String cmtime) {
         this.cmtime = cmtime;
     }
 

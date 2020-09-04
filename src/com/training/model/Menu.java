@@ -1,5 +1,7 @@
 package com.training.model;
 
+import java.util.List;
+
 public class Menu {
     private long id;
     private String menuname;//菜单名
@@ -8,6 +10,15 @@ public class Menu {
     private String location;//位置
     private String needforce;//是否需要权限
     private String menulogo;//图标
+    private List<Menu> childrenmenu;
+
+    public List<Menu> getChildrenmenu() {
+        return childrenmenu;
+    }
+
+    public void setChildrenmenu(List<Menu> childrenmenu) {
+        this.childrenmenu = childrenmenu;
+    }
 
     public long getId() {
         return id;

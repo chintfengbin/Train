@@ -20,8 +20,27 @@ public class Source {
     private String filesize;
     private String bgpath;
     private long userclick;
-    private long show;
+    private String show;
     private String deptname;
+
+    private String reallocation;
+    private String realbgpath;
+
+    public String getReallocation() {
+        return reallocation;
+    }
+
+    public void setReallocation(String reallocation) {
+        this.reallocation = reallocation;
+    }
+
+    public String getRealbgpath() {
+        return realbgpath;
+    }
+
+    public void setRealbgpath(String realbgpath) {
+        this.realbgpath = realbgpath;
+    }
 
     public String getDeptname() {
         return deptname;
@@ -31,11 +50,11 @@ public class Source {
         this.deptname = deptname;
     }
 
-    public long getShow() {
+    public String getShow() {
         return show;
     }
 
-    public void setShow(long show) {
+    public void setShow(String show) {
         this.show = show;
     }
 

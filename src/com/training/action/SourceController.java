@@ -3,6 +3,7 @@ package com.training.action;
 import com.training.model.PageInfo;
 import com.training.model.Source;
 import com.training.service.SourceService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,15 +42,16 @@ public class SourceController {
     @ResponseBody
     public String upload(@RequestParam(value = "file",required = false) CommonsMultipartFile file, @RequestParam(value = "bgpath",required = false) CommonsMultipartFile bgpath,HttpServletRequest request,HttpServletResponse response) throws IOException {
         cross(response);
-        System.out.println("文件上传成功！");
+        if (file.isEmpty()||bgpath.isEmpty()){
+            return "please select file";
+        }
         Source source=new Source();
         source.setTitle(request.getParameter("title"));
-        source.setType(request.getParameter("type"));
         source.setExplain(request.getParameter("explain"));
         source.setUploadby(request.getParameter("uploadby"));
+        source.setDeptname(request.getParameter("deptname"));
+        source.setShow(request.getParameter("show"));
         source.setUploadtime(String.valueOf(new Date()));
-        System.out.println(source);
-        //sourceService.add(source);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String res = sdf.format(new Date());
@@ -56,6 +62,8 @@ public class SourceController {
         // 原始名称
         String originalFileName = file.getOriginalFilename();
         String originalImageName = bgpath.getOriginalFilename();
+        source.setType(originalFileName.substring((originalFileName.lastIndexOf("."))+1));
+        System.out.println("******************"+originalFileName+"******"+source.getType());
         // 新文件名
         String newFileName = "sliver" + res + originalFileName.substring(originalFileName.lastIndexOf("."));
         String newImageName = "image" +res+originalImageName.substring(originalImageName.lastIndexOf("."));
@@ -68,6 +76,11 @@ public class SourceController {
         File newFile = new File(rootPath + File.separator + dateDirs + File.separator + newFileName);
         File newImage = new File(rootPath + File.separator + dateDirs + File.separator + newImageName);
 
+        //数据库url
+        String newFile1 = "http://10.120.7.221:8080/train" + "/"+ dateDirs + "/" + newFileName;
+        String newImage1 = "http://10.120.7.221:8080/train" + "/" + dateDirs + "/"+ newImageName;
+
+
         // 判断目标文件所在目录是否存在
         if( !newFile.getParentFile().exists()) {
             // 如果目标文件所在的目录不存在，则创建父目录
@@ -78,16 +91,30 @@ public class SourceController {
         // 将内存中的数据写入磁盘
         file.transferTo(newFile);
         bgpath.transferTo(newImage);
+        //将保存的磁盘路径写入数据库
+        source.setReallocation(newFile.toString());
+        source.setRealbgpath(newImage.toString());
         // 完整的url
         //String fileUrl = date.get(Calendar.YEAR) + "/" + (date.get(Calendar.MONTH)+1) + "/" + newFileName;
         source.setUploadtime(sdf1.format(new Date()));
-        source.setLocation(newFile.toString());
-        source.setBgimage(newImage.toString());
+        source.setLocation(newFile1.toString());
+        source.setBgimage(newImage1.toString());
         sourceService.add(source);
         System.out.println("上传文件成功！");
-        return "success！";
+        return "success!";
     }
 
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(long id){
+        Source source =sourceService.getSourceById(id);
+        File location =new File(source.getReallocation());
+        File bgpath = new File(source.getRealbgpath());
+        location.delete();
+        bgpath.delete();
+        sourceService.delete(id);
+        return "success!";
+    }
 
     @RequestMapping("/listjson")
     @ResponseBody

@@ -11,4 +11,6 @@ public interface CommentMapper {
     void deleteComment(long id);
 
     List<Comment> getCommentBySource(long source_id);
+
+    List<Comment> listAll(long condition);
 }

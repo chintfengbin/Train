@@ -36,6 +36,16 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
+    public void delete(long id) {
+        sourceMapper.delete(id);
+    }
+
+    @Override
+    public Source getSourceById(long id) {
+       return sourceMapper.getSourceById(id);
+    }
+
+    @Override
     public List<Source> list() {
         return sourceMapper.list();
     }

@@ -14,4 +14,7 @@ public interface SourceService {
 
     PageInfo<Source> listSourceByDept(Integer currentPage,Integer pageSize,String deptname);
 
+    void delete(long id);
+
+    Source getSourceById(long id);
 }

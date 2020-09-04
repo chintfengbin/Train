@@ -38,4 +38,10 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments=commentMapper.getCommentBySource(source_id);
         return spratePage.sparate(currentPage,pageSize,comments);
     }
+
+    @Override
+    public PageInfo<Comment> listAll(Integer currentPage, Integer pageSize, long condition) {
+        List<Comment> comments=commentMapper.listAll(condition);
+        return spratePage.sparate(currentPage,pageSize,comments);
+    }
 }

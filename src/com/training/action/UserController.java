@@ -2,11 +2,9 @@ package com.training.action;
 
 import com.training.model.PageInfo;
 import com.training.model.User;
-import com.training.model.UserSource;
 import com.training.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,7 +16,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-
 
     @RequestMapping("/add")
     @ResponseBody

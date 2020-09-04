@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,6 +25,8 @@ public class CommentController {
     @ResponseBody
     public String add(Comment comment,HttpServletResponse response){
         cross(response);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        comment.setCmtime(sdf.format(new Date()));
         commentService.addComment(comment);
         return "success!";
     }
@@ -46,6 +50,13 @@ public class CommentController {
     public PageInfo<Comment> list(Integer currentPage, Integer pageSize, long source_id, HttpServletResponse response){
         cross(response);
         PageInfo<Comment> comments= commentService.listCommentByPage(currentPage,pageSize,source_id);
+        return comments;
+    }
+
+    @RequestMapping("/listAll")
+    @ResponseBody
+    public PageInfo<Comment> listAll(Integer currentPage, Integer pageSize,long condition){
+        PageInfo<Comment> comments = commentService.listAll(currentPage,pageSize,condition);
         return comments;
     }
 

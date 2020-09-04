@@ -18,4 +18,7 @@ public interface SourceMapper {
 
     List<Source> listSourceByDept(String deptname);
 
+    void delete(long id);
+
+    Source getSourceById(long id);
 }

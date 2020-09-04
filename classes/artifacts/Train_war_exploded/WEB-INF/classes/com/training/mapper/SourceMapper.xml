@@ -14,6 +14,8 @@
     <result column="userclick" jdbcType="BIGINT" property="userclick"/>
     <result column="show" jdbcType="BIGINT" property="show"/><!--可见-->
     <result column="deptname" jdbcType="VARCHAR" property="deptname"/>
+    <result column="reallocation" jdbcType="VARCHAR" property="reallocation"/>
+    <result column="realbgpath" jdbcType="VARCHAR" property="realbgpath"/>
 
   </resultMap>
 
@@ -57,6 +59,12 @@
         <if test="deptname != null">
             deptname,
         </if>
+        <if test="reallocation != null">
+            reallocation,
+        </if>
+        <if test="realbgpath != null">
+            realbgpath,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 <!--      <if test="id != null">-->
@@ -92,6 +100,12 @@
         <if test="deptname != null">
             #{deptname},
         </if>
+        <if test="reallocation != null">
+            #{reallocation},
+        </if>
+        <if test="realbgpath != null">
+            #{realbgpath},
+        </if>
     </trim>
   </insert>
 
@@ -99,4 +113,12 @@
 --     select id,title,filetype,location,uploadtime,bgpath,deptname from source;
         select * from source
   </select>
+
+    <delete id="delete" parameterType="long">
+        delete from source where id= #{id};
+    </delete>
+
+    <select id="getSourceById" parameterType="long" resultMap="BaseResultMap">
+        select * from source where id=#{id};
+    </select>
 </mapper>
