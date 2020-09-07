@@ -112,7 +112,8 @@ public class SourceController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(long id){
+    public String delete(long id,HttpServletResponse response){
+        cross(response);
         Source source =sourceService.getSourceById(id);
         File location =new File(source.getReallocation());
         File bgpath = new File(source.getRealbgpath());
@@ -139,20 +140,33 @@ public class SourceController {
 
     @RequestMapping("/listSourceByDept")
     @ResponseBody
-    public PageInfo<Source> listByDept(Integer currentPage,Integer pageSize,String deptname,HttpServletRequest request){
+    public PageInfo<Source> listByDept(Integer currentPage,Integer pageSize,String deptname,HttpServletRequest request,HttpServletResponse response){
+        cross(response);
         return sourceService.listSourceByDept(currentPage,pageSize,deptname);
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(Source source){
-         sourceService.update(source);
-         return "success!";
+    public String update(Source source,HttpServletResponse response,@RequestParam(value = "newImage",required = false) CommonsMultipartFile newImage) throws IOException {
+        cross(response);
+        if (newImage.isEmpty()||newImage.getSize()==0){
+            sourceService.update(source);
+            return "change without bgimage success!";
+        }else {
+            Source source1 =sourceService.getSourceById(source.getId());
+            File bgpath = new File(source1.getRealbgpath());
+            bgpath.delete();
+            newImage.transferTo(new File(source1.getRealbgpath()));
+            sourceService.update(source);
+            return "success!";
+        }
+
     }
 
     @RequestMapping("/getSourceById")
     @ResponseBody
-    public Source update(long id){
+    public Source update(long id,HttpServletResponse response){
+        cross(response);
         Source source=sourceService.getSourceById(id);
         return source;
     }

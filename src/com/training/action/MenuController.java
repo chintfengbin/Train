@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,21 +25,24 @@ public class MenuController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(Menu menu){
+    public String add(Menu menu,HttpServletResponse response){
+        cross(response);
         menuService.add(menu);
         return "success!";
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(long id){
+    public String delete(long id, HttpServletResponse response ){
+        cross(response);
         menuService.delete(id);
         return "success!";
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(Menu menu){
+    public String update(Menu menu,HttpServletResponse response){
+        cross(response);
         menuService.update(menu);
         return "success!";
     }
@@ -46,7 +52,8 @@ public class MenuController {
      */
     @RequestMapping("/listAllMenu")
     @ResponseBody
-    public List<Menu> listAll(){
+    public List<Menu> listAll(HttpServletResponse response){
+        cross(response);
         List<Menu> fatherMenus =menuService.listByUpMenu("");
         List<Menu> allMenus =menuService.listAllMenu();
 
@@ -71,7 +78,8 @@ public class MenuController {
 
     @RequestMapping("/listByUpMenu")
     @ResponseBody
-    public List<Menu> list(String upmenu){
+    public List<Menu> list(String upmenu,HttpServletResponse response){
+        cross(response);
         return menuService.listByUpMenu(upmenu);
     }
 
@@ -98,5 +106,10 @@ public class MenuController {
         }
         else
          menuTree(newFatherMenus,allMenu);
+    }
+
+    public void cross(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 }

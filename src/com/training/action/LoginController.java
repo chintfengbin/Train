@@ -83,7 +83,8 @@ public class LoginController  extends BaseController{
 		//登录验证
 	 	@RequestMapping("/check")
 	    @ResponseBody
-	    public Map<String, Object> ajaxLogin(String username, String password,HttpSession session) {
+	    public Map<String, Object> ajaxLogin(String username, String password,HttpSession session,HttpServletResponse response) {
+	 		cross(response);
 
 		 Map<String,Object> msg =new HashMap<String,Object>();
 		 if(StringUtils.isEmpty(username)||StringUtils.isEmpty(password)){
@@ -115,7 +116,8 @@ public class LoginController  extends BaseController{
 
 		@RequestMapping("/logout")
 		@ResponseBody
-		public String logout(HttpServletRequest request) throws Exception {
+		public String logout(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	 		cross(response);
 
 			request.getSession().invalidate();
 

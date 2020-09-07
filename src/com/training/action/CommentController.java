@@ -55,7 +55,8 @@ public class CommentController {
 
     @RequestMapping("/listAll")
     @ResponseBody
-    public PageInfo<Comment> listAll(Integer currentPage, Integer pageSize,long condition){
+    public PageInfo<Comment> listAll(Integer currentPage, Integer pageSize,long condition, HttpServletResponse response){
+        cross(response);
         PageInfo<Comment> comments = commentService.listAll(currentPage,pageSize,condition);
         return comments;
     }
