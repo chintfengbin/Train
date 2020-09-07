@@ -7,6 +7,12 @@
   <result column="password" jdbcType="VARCHAR" property="password" />
   
   </resultMap>
- 
 
+  <insert id="add" parameterType="com.training.model.Login">
+    insert into login (login_name,password) values(#{loginName},#{password});
+  </insert>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from login where login_name = #{username};
+  </select>
 </mapper>

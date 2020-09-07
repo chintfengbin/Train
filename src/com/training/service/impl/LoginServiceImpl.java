@@ -14,4 +14,9 @@ public class LoginServiceImpl implements LoginService {
     public void add(Login login) {
             loginMapper.add(login);
     }
+
+    @Override
+    public Login selectByName(String username) {
+        return loginMapper.selectByName(username);
+    }
 }

@@ -21,4 +21,6 @@ public interface SourceMapper {
     void delete(long id);
 
     Source getSourceById(long id);
+
+    void update(Source source);
 }

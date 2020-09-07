@@ -2,8 +2,8 @@ package com.training.action;
 
 import com.training.model.PageInfo;
 import com.training.model.Source;
+import com.training.model.User;
 import com.training.service.SourceService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,11 +43,14 @@ public class SourceController {
             return "please select file";
         }
         Source source=new Source();
+        //获取页面表单提交的数据
         source.setTitle(request.getParameter("title"));
         source.setExplain(request.getParameter("explain"));
         source.setUploadby(request.getParameter("uploadby"));
         source.setDeptname(request.getParameter("deptname"));
         source.setShow(request.getParameter("show"));
+
+        //时间模板
         source.setUploadtime(String.valueOf(new Date()));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -99,6 +99,12 @@ public class SourceController {
         source.setUploadtime(sdf1.format(new Date()));
         source.setLocation(newFile1.toString());
         source.setBgimage(newImage1.toString());
+        //计算文件大小，以M为单位
+        DecimalFormat df = new DecimalFormat( "0.## ");
+        Float si=file.getSize()/1024f/1024f;
+        System.out.println(df.format(si)+"M");
+        source.setSize(si+"M");
+
         sourceService.add(source);
         System.out.println("上传文件成功！");
         return "success!";
@@ -137,6 +143,28 @@ public class SourceController {
         return sourceService.listSourceByDept(currentPage,pageSize,deptname);
     }
 
+    @RequestMapping("/update")
+    @ResponseBody
+    public String update(Source source){
+         sourceService.update(source);
+         return "success!";
+    }
+
+    @RequestMapping("/getSourceById")
+    @ResponseBody
+    public Source update(long id){
+        Source source=sourceService.getSourceById(id);
+        return source;
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public User test(String a){
+        System.out.println(a);
+        User user=new User();
+        user.setUsername(a);
+        return user;
+    }
 
     public List<String> find(File file) {
         File[] file1 = file.listFiles();

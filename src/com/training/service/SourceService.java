@@ -17,4 +17,6 @@ public interface SourceService {
     void delete(long id);
 
     Source getSourceById(long id);
+
+    void update(Source source);
 }

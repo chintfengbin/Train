@@ -4,4 +4,5 @@ import com.training.model.Login;
 
 public interface LoginService {
     void add(Login login);
+    Login selectByName(String username);
 }

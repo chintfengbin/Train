@@ -121,4 +121,28 @@
     <select id="getSourceById" parameterType="long" resultMap="BaseResultMap">
         select * from source where id=#{id};
     </select>
+
+    <update id="update" parameterType="com.training.model.Source">
+        update source
+        <set>
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="explain != null">
+                explain=#{explain},
+            </if>
+
+            <if test="bgpath != null">
+                bgpath=#{bgpath},
+            </if>
+            <if test="show != null">
+                show=#{show},
+            </if>
+            <if test="deptname != null">
+                deptname=#{deptname},
+            </if>
+
+        </set>
+        where id = #{id};
+    </update>
 </mapper>

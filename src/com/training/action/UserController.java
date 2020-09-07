@@ -1,7 +1,9 @@
 package com.training.action;
 
+import com.training.model.Login;
 import com.training.model.PageInfo;
 import com.training.model.User;
+import com.training.service.LoginService;
 import com.training.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoginService loginService;
+
+
     @RequestMapping("/add")
     @ResponseBody
     public String add(User user,HttpServletResponse response){
@@ -25,6 +31,12 @@ public class UserController {
         User user1=userService.selectByName(name);
         if (user1==null){
             userService.add(user);
+
+            //添加用户登录信息到登陆表
+            Login login =new Login();
+            login.setLoginName(user.getUsername());
+            login.setPassword(user.getPassword());
+            loginService.add(login);
             return "success!";
         }
         else {
