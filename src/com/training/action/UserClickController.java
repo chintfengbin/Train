@@ -34,5 +34,7 @@ public class UserClickController {
     public void cross(HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE");
+
     }
 }

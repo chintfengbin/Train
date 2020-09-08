@@ -62,8 +62,12 @@ public class SourceController {
         // 原始名称
         String originalFileName = file.getOriginalFilename();
         String originalImageName = bgpath.getOriginalFilename();
+        //获取文件后缀名
         source.setType(originalFileName.substring((originalFileName.lastIndexOf("."))+1));
+        String type =originalFileName.substring((originalFileName.lastIndexOf("."))+1);
+
         System.out.println("******************"+originalFileName+"******"+source.getType());
+
         // 新文件名
         String newFileName = "sliver" + res + originalFileName.substring(originalFileName.lastIndexOf("."));
         String newImageName = "image" +res+originalImageName.substring(originalImageName.lastIndexOf("."));
@@ -76,8 +80,16 @@ public class SourceController {
         File newFile = new File(rootPath + File.separator + dateDirs + File.separator + newFileName);
         File newImage = new File(rootPath + File.separator + dateDirs + File.separator + newImageName);
 
+        String newFile1;
         //数据库url
-        String newFile1 = "http://10.120.7.221:8080/train" + "/"+ dateDirs + "/" + newFileName;
+        if (type.equals("mp4")){
+             newFile1 = "http://10.120.7.221:8080/train" + "/"+ dateDirs + "/" + newFileName;
+
+        }
+        else{
+             newFile1 = "http://10.120.7.223:8012/onlinePreview?url="+"http://10.120.7.221:8080/train" + "/"+ dateDirs + "/" + newFileName;
+
+        }
         String newImage1 = "http://10.120.7.221:8080/train" + "/" + dateDirs + "/"+ newImageName;
 
 
@@ -110,7 +122,7 @@ public class SourceController {
         return "success!";
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete")
     @ResponseBody
     public String delete(long id,HttpServletResponse response){
         cross(response);
@@ -199,5 +211,6 @@ public class SourceController {
     public void cross(HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE");
     }
 }
