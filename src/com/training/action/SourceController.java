@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -159,9 +161,9 @@ public class SourceController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(Source source,HttpServletResponse response,@RequestParam(value = "newImage",required = false) CommonsMultipartFile newImage) throws IOException {
+    public String update(Source source,HttpServletResponse response,/*@RequestParam(value = "newImage",required = false) CommonsMultipartFile newImage,*/HttpServletRequest request) throws IOException {
         cross(response);
-        if (newImage.isEmpty()||newImage.getSize()==0){
+/*        if (newImage.isEmpty()||newImage.getSize()==0){
             sourceService.update(source);
             return "change without bgimage success!";
         }else {
@@ -171,8 +173,21 @@ public class SourceController {
             newImage.transferTo(new File(source1.getRealbgpath()));
             sourceService.update(source);
             return "success!";
+        }*/
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("newImage");
+        MultipartFile newImage = null;
+        if (files.size()>0&&!files.get(0).isEmpty()){
+            newImage = files.get(0);
+            Source source1 =sourceService.getSourceById(source.getId());
+            File bgpath = new File(source1.getRealbgpath());
+            bgpath.delete();
+            newImage.transferTo(new File(source1.getRealbgpath()));
+            sourceService.update(source);
+            return "success!";
+        }else {  /*读取文件失败*/
+            sourceService.update(source);
+            return "change without bgimage success!";
         }
-
     }
 
     @RequestMapping("/getSourceById")
