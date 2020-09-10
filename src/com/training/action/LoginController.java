@@ -1,6 +1,7 @@
 package com.training.action;
 
 import com.training.common.core.controller.BaseController;
+import com.training.common.utils.JwtUtil;
 import com.training.model.Login;
 import com.training.model.User;
 import com.training.service.LoginService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -83,7 +85,7 @@ public class LoginController  extends BaseController{
 		//登录验证
 	 	@RequestMapping("/check")
 	    @ResponseBody
-	    public Map<String, Object> ajaxLogin(String username, String password,HttpSession session,HttpServletResponse response) {
+	    public Map<String, Object> ajaxLogin(String username, String password,HttpSession session,HttpServletResponse response,HttpServletRequest request) {
 	 		cross(response);
 
 		 Map<String,Object> msg =new HashMap<String,Object>();
@@ -95,22 +97,26 @@ public class LoginController  extends BaseController{
 		 User user = userService.selectByName(username);
 
 		 if (user==null){
-		 	msg.put("msg","该用户不存在，请注册!");
+		 	msg.put("msg","该用户不存在!");
 		 	return msg;
 		 }else{
-
 		 	if (user.getPassword().equals(password)){
 		 		msg.put("msg","登录成功!");
-		 		session.setAttribute("curUser",user);
+//		 		session.setAttribute("curUser",user);
+				String token = JwtUtil.sign(username,user);
+				if (token !=null){
+					Cookie cookie = new Cookie("_COOKIE_NAME", token);
+					cookie.setMaxAge(3600);//设置token有效时间
+					cookie.setPath("/");
+					response.addCookie(cookie);
+				}
+				msg.put("token",token);
 		 		return msg;
 			}else {
 		 		msg.put("msg","密码错误请检查后重新输入!");
+		 		return msg;
 			}
 		 }
-
-		 msg.put("msg","未知错误请联系管理员!");
-
-		 return msg;
 	    }
 
 
@@ -131,5 +137,39 @@ public class LoginController  extends BaseController{
 			response.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE");
 
 		}
-	
+
+	/**
+	 * 根据名字获取cookie
+	 *
+	 * @param request
+	 * @param name    cookie名字
+	 * @return
+	 */
+	public static Cookie getCookieByName(HttpServletRequest request, String name) {
+		Map<String, Cookie> cookieMap = ReadCookieMap(request);
+		if (cookieMap.containsKey(name)) {
+			Cookie cookie =  cookieMap.get(name);
+			return cookie;
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * 将cookie封装到Map里面
+	 *
+	 * @param request
+	 * @return
+	 */
+	private static Map<String, Cookie> ReadCookieMap(HttpServletRequest request) {
+		Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
+		Cookie[] cookies = request.getCookies();
+		if (null != cookies) {
+			for (Cookie cookie : cookies) {
+				cookieMap.put(cookie.getName(), cookie);
+			}
+		}
+		return cookieMap;
+	}
+
+
 }

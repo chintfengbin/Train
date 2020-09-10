@@ -100,4 +100,16 @@
         </mvc:interceptor>
     </mvc:interceptors>
     -->
+
+	<!--自定义拦截器-->
+<!--	<mvc:interceptors>-->
+<!--		&lt;!&ndash;		验证是否登录 通过cookie &ndash;&gt;-->
+<!--		<mvc:interceptor>-->
+<!--			&lt;!&ndash; 拦截所有mvc控制器 &ndash;&gt;-->
+<!--			<mvc:mapping path="/**"/>-->
+<!--			&lt;!&ndash;			<mvc:exclude-mapping path="/login/check"/>&ndash;&gt;-->
+<!--			<bean class="com.training.common.utils.spring.TokenInterceptor"></bean>-->
+<!--		</mvc:interceptor>-->
+
+<!--	</mvc:interceptors>-->
 </beans>  
